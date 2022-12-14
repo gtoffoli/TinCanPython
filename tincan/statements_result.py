@@ -25,6 +25,7 @@ class StatementsResult(SerializableBase):
     _props_req = [
         'statements',
         'more',
+        'data',
     ]
 
     _props = []
@@ -33,6 +34,7 @@ class StatementsResult(SerializableBase):
     def __init__(self, *args, **kwargs):
         self._statements = None
         self._more = None
+        self._data = None
 
         super().__init__(*args, **kwargs)
 

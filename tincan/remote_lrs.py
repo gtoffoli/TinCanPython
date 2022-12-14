@@ -296,7 +296,7 @@ class RemoteLRS(Base):
 
         return lrs_response
 
-    def query_statements(self, query):
+    def query_statements(self, query, content=None):
         """Query the LRS for statements with specified parameters
 
         :param query: Dictionary of query parameters and their values
@@ -343,6 +343,8 @@ class RemoteLRS(Base):
             "related_agents",
             "format",
             "attachments",
+            "sort",
+            "filters",
         ]
 
         for k, v in query.items():
@@ -359,6 +361,10 @@ class RemoteLRS(Base):
             resource="statements"
         )
         request.query_params = params
+
+        if content:
+            request.content = content
+            request.headers["Content-Type"] = "application/json"
 
         lrs_response = self._send_request(request)
 
